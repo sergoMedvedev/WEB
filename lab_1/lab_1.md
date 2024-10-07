@@ -125,6 +125,71 @@ body:
 
 <h4>POST метод:</h4>
 
+1) Отправим запрос на https://yandex.ru
+
+body request:
+
+```
+{
+  "title": "foo",
+  "body": "bar",
+  "userId": 1
+}
+```
+
+Headers response:
+![](img/post/yandex_1.png)
+body response:
+![](img/post/yandex_2.png)
+
+В данном ответе видно, что при смене метода был и отправлен сервером другая html страница. 
+
+2) Отправим запрос на https://google.com
+
+body request:
+
+```
+{
+  "title": "foo",
+  "body": "bar",
+  "userId": 1
+}
+```
+
+Headers response:
+![](img/post/google_1.png)
+body response:
+![](img/post/google_2.png)
+
+В данном запросе была получен код ошибки 405.
+Данная ошибка говорит о том, что данный метод запрещен по данному url адресу. было получен html страница.
+
+
+3) Отправим запрос на https://apple.com
+
+body request:
+
+```
+{
+  "title": "foo",
+  "body": "bar",
+  "userId": 1
+}
+```
+
+Headers response:
+![](img/post/apple_1.png)
+body response:
+![](img/post/apple_2.png)
+
+При данном запросе был получен код 200. 
+И сервер в ответ отправляет html страницу.
+
+
+
+
+
+
 
 
 
