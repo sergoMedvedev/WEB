@@ -99,6 +99,11 @@
 
 <h3>1.2.3 Ознакомиться с методами POST и GET.</h3>
 
+•	GET — метод для получения данных с сервера. Он передаётся с URL, поэтому виден в адресной строке браузера или истории посещений сайтов. Применяется в фильтрах поисковиков и онлайн-магазинов.
+
+•	POST — метод отправки данных на сервер, например, после заполнения формы регистрации или авторизации на сайте.
+
+
 <h4>GET метод:</h4>
 
 1) Оправим запрос на https://yandex.ru
@@ -184,6 +189,47 @@ body response:
 
 При данном запросе был получен код 200. 
 И сервер в ответ отправляет html страницу.
+
+<h3>1.3. Работа с API VK</h3>
+
+Был получен токен доступа.
+
+1) Отправим запрос на https://api.vk.com/method/users.get?user_ids=601199047&fields=photo_200&access_token=vk1.a.DJmVXkrWrDQ3z91gqDVGEIQE-bgLpMALr8vrmcfsuVd-YY4EPGKNeNBz96QjuOI2Fai8o-VNvJKFk5BrK50rDdzJEIvDohnc2WFIi7nttPZPfrKUbJBrrboWSdR3VBtsadEGAcgTEeS6wswMT6WbGzDwg4qz0nxEHmx6vz4C6GxYLYxzewjPFTCH6nuUr9PTbcxXErtSK_qm-_LRLK84Lw&v=5.199 HTTP/1.1
+
+
+Получение фото:
+![](img/vk/1.png)
+
+Фото, которое было получено по ссылке:
+![](img/vk/2.png)
+
+<h3>1.3.2.1. Получите список всех факультетов МГТУ им. Н.Э.Баумана.</h3>
+
+1) Отправим запрос на https://api.vk.com/method/database.getFaculties?university_id=250&access_token=vk1.a.WklpDcfM_VEReIaGV6xc0RAU6mslLOZUTpQ-WcfJdvu8RQxZhWgMFKsfNF-RI4LuvSqZHVMyR5-D6fUEtQlq4poVcX1G-A2EN_I16pj0zdu31qiVSmmjhEspbj_S0xEFOAp-lI36gecuFLF5lKqwmioSIQ8zLrMgtbZwDWCHyN2tY4aCGBlJZk9Mk114rVkayrduve9Fpi7-rVySLCewEQ&v=5.199 HTTP/1.1
+
+Получение фото:
+![](img/vk/3.png)
+
+
+<h3>1.3.3.1. Отправить запись на стену.</h3>
+
+1) Отправим запрос на https://api.vk.com/method/wall.post?message=testing&owner_id=601199047&access_token=vk1.a.WklpDcfM_VEReIaGV6xc0RAU6mslLOZUTpQ-WcfJdvu8RQxZhWgMFKsfNF-RI4LuvSqZHVMyR5-D6fUEtQlq4poVcX1G-A2EN_I16pj0zdu31qiVSmmjhEspbj_S0xEFOAp-lI36gecuFLF5lKqwmioSIQ8zLrMgtbZwDWCHyN2tY4aCGBlJZk9Mk114rVkayrduve9Fpi7-rVySLCewEQ&expires_in=86400&v=5.199 HTTP/1.1
+
+Ответ на отправку запроса на запись на стену:
+![](img/vk/4.png)
+
+Результат запроса:
+![](img/vk/5.png)
+
+
+
+
+
+
+
+
+
+
 
 
 
