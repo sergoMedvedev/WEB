@@ -13,6 +13,9 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/player/:id", router.GetPlayer)
+	r.POST("/player", router.CreatePlayer)
+	r.DELETE("/player/:id", router.DeletePlayer)
+	r.GET("/players", router.GetPlayers)
 
 	r.Run()
 }
