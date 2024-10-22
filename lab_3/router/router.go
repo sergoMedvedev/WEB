@@ -73,3 +73,41 @@ func DeletePlayer(c *gin.Context) {
 func GetPlayers(c *gin.Context) {
 	c.JSON(200, gin.H{"data": data.Players})
 }
+
+func UpdatePlayer(c *gin.Context) {
+	jsonData, err := io.ReadAll(c.Request.Body)
+	if err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+	}
+
+	pl := data.PlayerDTO{}
+
+	err = json.Unmarshal(jsonData, &pl)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+	}
+
+	var clearPlayer []*data.PlayerDTO
+
+	for _, plaer := range data.Players {
+		if plaer.Id == pl.Id {
+
+			if plaer.Name != pl.Name {
+				plaer.Name = pl.Name
+			}
+
+			if plaer.SecondName != plaer.SecondName {
+				plaer.SecondName = pl.SecondName
+			}
+
+			if plaer.Rating != plaer.Rating {
+				plaer.Rating = pl.Rating
+			}
+
+			clearPlayer = append(clearPlayer, plaer)
+			continue
+		}
+		clearPlayer = append(clearPlayer, plaer)
+	}
+	c.JSON(200, gin.H{"data": pl})
+}
