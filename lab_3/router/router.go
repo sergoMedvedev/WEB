@@ -39,9 +39,15 @@ func CreatePlayer(c *gin.Context) {
 	err = json.Unmarshal(jsonData, &pl)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
+		return
 	}
 
-	log.Println(jsonData)
+	for _, player:= range data.Players {
+		if player.Id == pl.Id {
+			c.JSON(409, gin.H{"error": "dublicat id"})
+			return
+		}
+	} 
 
 	data.Players = append(data.Players, &pl)
 	c.JSON(200, gin.H{"data": pl})
