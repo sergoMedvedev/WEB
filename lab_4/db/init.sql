@@ -1,32 +1,49 @@
-CREATE TABLE costumer  (
-	UserId 		    SERIAL PRIMARY KEY,
-	FirstName	    CHARACTER VARYING(30),
-	LastName 		CHARACTER VARYING(30),
-	Login			CHARACTER VARYING(30),
-	Password 		CHARACTER VARYING(30),
-	Access			CHARACTER VARYING(30)
-);
-
-CREATE TABLE coach (
-	CoachId			SERIAL 				  	PRIMARY KEY,
-	FirstName	    CHARACTER VARYING(30) 	NOT NULL,
-	LastName 		CHARACTER VARYING(30) 	NOT NULL
-	IdSquad			INT	                    NOT NULL,
-	CONSTRAINT fk_squad FOREIGN KEY(IdSquad) REFERENCES squad(SquadId)
-);
-
-CREATE TABLE squad (
-	SquadId		SERIAL 					PRIMARY KEY,
-	NameSquad	CHARACTER VARYING(30)	NOT NULL,
-	RatingSquad	INT						NOT NULL,
+CREATE TABLE costumer (
+	user_id 		SERIAL                PRIMARY KEY,
+	first_name	    CHARACTER VARYING(30) NOT NULL,
+	last_name 		CHARACTER VARYING(30) NOT NULL,
+	login			CHARACTER VARYING(30) NOT NULL,
+	password 		CHARACTER VARYING(30) NOT NULL,
+	access			CHARACTER VARYING(30) NOT NULL
 );
 
 CREATE TABLE footballer (
-	footballerId 	SERIAL 				  PRIMARY KEY,
-	FirstName	    CHARACTER VARYING(30) NOT NULL,
-	LastName 		CHARACTER VARYING(30) NOT NULL,
-	Position 		CHARACTER VARYING(3)  NOT NULL,
-	Rating 			INT					  NOT NULL,
-	IdSqued			INT						NOT NULL
-	CONSTRAINT IdSquad FOREIGN KEY(IdSquad) REFERENCES squad(SquadId)
-)
+	footballer_id 	SERIAL PRIMARY KEY,
+	first_name	    CHARACTER VARYING(30) NOT NULL,
+	last_name 		CHARACTER VARYING(30) NOT NULL,
+	position 		CHARACTER VARYING(3)  NOT NULL,
+	rating 			INT					  NOT NULL
+);
+
+CREATE TABLE football_club (
+	football_club_id 	SERIAL PRIMARY KEY,
+	name_clab CHARACTER VARYING(30)  NOT NULL
+);
+
+CREATE TABLE squad (
+	squad_id		SERIAL PRIMARY KEY,
+	name_squad	CHARACTER VARYING(30)			NOT NULL,
+	rating_squad	  INT						NOT NULL,
+	id_footballer	  INT,
+	id_football_club  INT,
+	CONSTRAINT fk_footballer FOREIGN KEY(id_footballer) REFERENCES footballer(footballer_id),
+	CONSTRAINT fk_football_club FOREIGN KEY(id_football_club) REFERENCES football_club(football_club_id)
+);
+
+CREATE TABLE coach (
+	coach_id			SERIAL 				PRIMARY KEY,
+	first_name	    CHARACTER VARYING(30) 	NOT NULL,
+	last_name 		CHARACTER VARYING(30) 	NOT NULL,
+	id_football_club	INT					NOT NULL,
+	CONSTRAINT fk_football_club FOREIGN KEY(id_football_club) REFERENCES football_club(football_club_id)
+);
+
+CREATE TABLE squad_football_club (
+	id_squad INT NOT NULL,
+	id_football_club INT NOT NULL,
+	CONSTRAINT fk_squad FOREIGN KEY(id_squad) REFERENCES squad(squad_id),
+	CONSTRAINT fk_football_club FOREIGN KEY(id_football_club) REFERENCES football_club(football_club_id)
+);
+
+
+
