@@ -1,0 +1,32 @@
+CREATE TABLE costumer  (
+	UserId 		    SERIAL PRIMARY KEY,
+	FirstName	    CHARACTER VARYING(30),
+	LastName 		CHARACTER VARYING(30),
+	Login			CHARACTER VARYING(30),
+	Password 		CHARACTER VARYING(30),
+	Access			CHARACTER VARYING(30)
+);
+
+CREATE TABLE coach (
+	CoachId			SERIAL 				  	PRIMARY KEY,
+	FirstName	    CHARACTER VARYING(30) 	NOT NULL,
+	LastName 		CHARACTER VARYING(30) 	NOT NULL
+	IdSquad			INT	                    NOT NULL,
+	CONSTRAINT fk_squad FOREIGN KEY(IdSquad) REFERENCES squad(SquadId)
+);
+
+CREATE TABLE squad (
+	SquadId		SERIAL 					PRIMARY KEY,
+	NameSquad	CHARACTER VARYING(30)	NOT NULL,
+	RatingSquad	INT						NOT NULL,
+);
+
+CREATE TABLE footballer (
+	footballerId 	SERIAL 				  PRIMARY KEY,
+	FirstName	    CHARACTER VARYING(30) NOT NULL,
+	LastName 		CHARACTER VARYING(30) NOT NULL,
+	Position 		CHARACTER VARYING(3)  NOT NULL,
+	Rating 			INT					  NOT NULL,
+	IdSqued			INT						NOT NULL
+	CONSTRAINT IdSquad FOREIGN KEY(IdSquad) REFERENCES squad(SquadId)
+)
