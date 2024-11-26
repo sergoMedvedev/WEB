@@ -1,19 +1,16 @@
 package main
 
 import (
-	"lab_4/server/src/settings"
-
 	"github.com/jmoiron/sqlx"
+	"lab_4/server/src/settings"
 )
 
 var initSql string
 
-type client struct {
-	dbinst *sqlx.DB
-}
+var DBinst *sqlx.DB
 
 func main() {
 	settings.InitializeFromEnv()
-	
+	settings.InitializePostgres(DBinst)
 
 }
