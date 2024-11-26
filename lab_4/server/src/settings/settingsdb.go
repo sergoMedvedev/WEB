@@ -2,19 +2,20 @@ package settings
 
 import (
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 	"log"
 )
 
-var DB *sqlx.DB
-
 func InitializePostgres(db *sqlx.DB) {
-	configUrl := "postgres:password@(localhost:15432)/test"
-	db, err := sqlx.Connect("postgres", configUrl)
+	//configUrl := "postgresql://localhost:15432/test"
+	db, err := sqlx.Open("postgres", "user=postgres password=password dbname=test sslmode=disable")
 	if err != nil {
 		log.Fatalln("Error when connect db: ", err.Error())
 	}
+	log.Println("Successfully connected to postgres")
+
 }
 
-func initPostgresDataBase() {
-
+func initPostgresDataBase(db *sqlx.DB) {
+	
 }
