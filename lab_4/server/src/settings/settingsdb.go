@@ -17,5 +17,5 @@ func InitializePostgres(db *sqlx.DB) {
 }
 
 func initPostgresDataBase(db *sqlx.DB) {
-	
+
 }
