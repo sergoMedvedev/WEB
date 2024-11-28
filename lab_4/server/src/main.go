@@ -2,6 +2,7 @@ package main
 
 import (
 	"lab_4/server/src/settings"
+	"lab_4/server/src/url"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
@@ -18,4 +19,7 @@ func main() {
 	settings.InitializePostgres()
 
 	R = gin.Default()
+
+	authApi := R.Group("/auth")
+	url.InitApiAuth(authApi)
 }
