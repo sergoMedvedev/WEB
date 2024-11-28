@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="178b9800-dd73-4c6f-aef2-1c8bde8015bd" name="Changes" comment="создал новую ветку, сделал первый коммит с новой папкой">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab_4/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab_4/server/src/settings/settingsdb.go" beforeDir="false" afterPath="$PROJECT_DIR$/lab_4/server/src/settings/settingsdb.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,10 +40,15 @@
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/sergey/develop/WEB/lab_4",
+    "last_opened_file_path": "/home/sergey/develop/WEB",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
