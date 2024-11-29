@@ -8,4 +8,6 @@ import (
 
 func InitApiAuth(auth *gin.RouterGroup) {
 	auth.POST("/login", controller.Login)
+	auth.GET("/registration", controller.Registration)
+	auth.POST("/registration-user", controller.RegistrationUser)
 }

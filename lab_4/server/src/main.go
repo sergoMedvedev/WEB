@@ -20,6 +20,12 @@ func main() {
 
 	R = gin.Default()
 
+	R.LoadHTMLGlob("template/*")
+
+	R.GET("/", func(c *gin.Context) {
+		c.HTML(200, "login.html", nil)
+	})
+
 	authApi := R.Group("/auth")
 	url.InitApiAuth(authApi)
 
