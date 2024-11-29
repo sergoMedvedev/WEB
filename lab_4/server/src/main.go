@@ -22,4 +22,6 @@ func main() {
 
 	authApi := R.Group("/auth")
 	url.InitApiAuth(authApi)
+
+	R.Run()
 }
