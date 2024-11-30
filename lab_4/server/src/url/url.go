@@ -11,3 +11,9 @@ func InitApiAuth(auth *gin.RouterGroup) {
 	auth.GET("/registration", controller.Registration)
 	auth.POST("/registration-user", controller.RegistrationUser)
 }
+
+
+func InitApiSystem(system *gin.RouterGroup) {
+	system.GET("/", controller.GetSystemPage)
+}
+

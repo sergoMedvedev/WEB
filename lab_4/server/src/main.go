@@ -29,5 +29,8 @@ func main() {
 	authApi := R.Group("/auth")
 	url.InitApiAuth(authApi)
 
+	systemApi := R.Group("/my-system")
+	url.InitApiSystem(systemApi)
+
 	R.Run()
 }

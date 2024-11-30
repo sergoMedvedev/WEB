@@ -19,8 +19,6 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	log.Println(string(jsonData))
-
 	request := costumer.Costumer{}
 
 	err = json.Unmarshal(jsonData, &request)
@@ -34,16 +32,14 @@ func Login(c *gin.Context) {
 		c.JSON(404, gin.H{"error": "Invalid login or password"})
 	}
 
-	log.Println(user.CostumerId)
-	log.Println(user.Role)
 	c.Set("id", user.CostumerId)
 	c.Set("role", user.Role)
 
-	c.HTML(200, "index.html", nil)
+	c.JSON(200, "{status : ok}")
 }
 
 func Registration(c *gin.Context) {
-	c.HTML(200, "registration.html", nil)
+	c.JSON(200, gin.H{"status": "OK"})
 }
 
 func RegistrationUser(c *gin.Context) {
@@ -68,6 +64,12 @@ func RegistrationUser(c *gin.Context) {
 		c.JSON(500, gin.H{"error": "Error server"})
 	}
 
+	c.JSON(200, "")
+}
+
+//____________SYSTEM________________________________
+
+func GetSystemPage(c *gin.Context) {
 	c.HTML(200, "index.html", nil)
 }
 

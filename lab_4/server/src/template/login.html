@@ -30,6 +30,12 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({login, password})
                 });
+
+                if (response.ok) {
+                window.location.href = '/my-system/'; 
+                } else {
+                    alert('Неправильный логин или пароль, попробуйте снова');
+                }
             });
         </script>
         <a href="http://127.0.0.1:8080/auth/registration" class="link">Зарегистрироваться</a>
