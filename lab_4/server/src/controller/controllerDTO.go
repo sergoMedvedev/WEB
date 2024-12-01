@@ -1,6 +1,5 @@
 package controller
 
-
 type LoginRequest struct {
 	Login    string `json:"login" example:"sergo_ranes"`
 	Password string `json:"password" example:"password"`
@@ -16,9 +15,16 @@ type LoginResponse struct {
 }
 
 type RegistRequest struct {
-	FirstName  string `json:"firstName" example:"Sergey"`
-	LastName   string `json:"lastName" example:"Medvedev"`
-	Login      string `json:"login" example:"sergo_ranes"`
-	Password   string `json:"password" example:"password"`
-	Role       string `json:"access" example:"user"`
+	FirstName string `json:"firstName" example:"Sergey"`
+	LastName  string `json:"lastName" example:"Medvedev"`
+	Login     string `json:"login" example:"sergo_ranes"`
+	Password  string `json:"password" example:"password"`
+	Role      string `json:"access" example:"user"`
 }
+
+type CoachRecordResponse struct {
+	FirstName string `json:"firstName" example:"Sergey"`
+	LastName  string `json:"lastName" example:"Oleynicov"`
+}
+
+

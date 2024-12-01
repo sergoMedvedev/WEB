@@ -21,7 +21,6 @@ func LoginCostumer(c *gin.Context, cosm *Costumer) (*Costumer, error) {
 	}
 
 	return &user, nil
-
 }
 
 func RegistCostumer(c *gin.Context, cosm *Costumer) (error) {

@@ -4,19 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Система Футбольного Клуба</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
+    <script>
+        function checkAccessAndRedirect() {
+            // Отправляем запрос на сервер для проверки прав доступа
+            fetch('/my-system/create-football-club', {
+                method: 'GET',
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    // Успешная проверка прав, переходим на страницу
+                    window.location.href = '/my-system/create-football-club';
+                } else if (response.status === 403) {
+                    // Недостаточно прав, отображаем предупреждение
+                    warning.textContent = 'У вас недостаточно прав для выполнения этого действия.';
+                    warning.style.display = 'block';
+                } else {
+                    console.error('Ошибка проверки прав доступа');
+                }
+            })
+            .catch(error => console.error('Ошибка:', error));
         }
-        h1 {
-            color: #333;
+    </script>
+    <style>
+        #warning-message {
+            color: red;
+            display: none;
         }
     </style>
+    <h1>Наши возможности:</h1>
+    <button onclick="checkAccessAndRedirect()">Создать футбольный клуб</button>
 </head>
 <body>
     <h1>Добро пожаловать в систему Футбольного Клуба!</h1>

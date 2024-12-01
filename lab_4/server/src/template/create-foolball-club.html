@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание футбольного клуба</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Загрузка тренеров из базы данных
+            fetch('/coach/coaches')
+                .then(response => response.json())
+                .then(data => {
+                    const coachSelect = document.getElementById('coach-select');
+                    data.forEach(coach => {
+                        const option = document.createElement('option');
+                        option.textContent = `${coach.firstName} ${coach.lastName}`;
+                        option.value = coach.coachId;  // Убедитесь, что у тренера есть coachId
+                        coachSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Ошибка загрузки тренеров:', error));
+
+            // Загрузка футболистов из базы данных
+            fetch('/footballer/footballers')
+                .then(response => response.json())
+                .then(data => {
+                    const footballerContainer = document.getElementById('footballer-container');
+                    data.forEach(footballer => {
+                        const footballerDiv = document.createElement('div');
+                        footballerDiv.className = 'footballer';
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.value = footballer.footballerId;  // Присваиваем footballerId в value
+                        checkbox.className = 'footballer-checkbox';
+
+                        const info = document.createElement('span');
+                        info.textContent = `${footballer.firstName} ${footballer.lastName} | Рейтинг: ${footballer.rating} | Позиция: ${footballer.position}`;
+
+                        footballerDiv.appendChild(checkbox);
+                        footballerDiv.appendChild(info);
+                        footballerContainer.appendChild(footballerDiv);
+                    });
+                })
+                .catch(error => console.error('Ошибка загрузки футболистов:', error));
+
+            // Обработчик отправки данных
+            document.getElementById('create-club-form').addEventListener('submit', event => {
+                event.preventDefault();
+
+                // Получение значений из формы
+                const clubName = document.getElementById('club-name').value;
+                const squadName = document.getElementById('squad-name').value; // Получаем название состава
+                const coachId = document.getElementById('coach-select').value;
+                const selectedFootballers = Array.from(document.querySelectorAll('.footballer-checkbox:checked'))
+                    .map(checkbox => checkbox.value);  // Теперь получаем правильные footballerId
+
+                // Формирование данных для отправки на сервер
+                const requestData = {
+                    club_name: clubName,
+                    squad_name: squadName, // Добавляем название состава
+                    coach_id: coachId,
+                    footballer_ids: selectedFootballers // Отправляем массив с footballerId
+                };
+
+                // Отправка данных на сервер
+                fetch('/my-system/create-football-club-my-system', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestData)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Футбольный клуб успешно создан!');
+                        window.location.reload();
+                    } else {
+                        response.json().then(err => alert(`Ошибка: ${err.message}`));
+                    }
+                })
+                .catch(error => alert(`Ошибка запроса: ${error.message}`));
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .footballer {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Создание футбольного клуба</h1>
+    <form id="create-club-form">
+        <label for="club-name">Название клуба:</label><br>
+        <input type="text" id="club-name" name="club-name" required><br><br>
+
+        <label for="squad-name">Название состава:</label><br>
+        <input type="text" id="squad-name" name="squad-name" required><br><br> <!-- Новое поле для названия состава -->
+
+        <label for="coach-select">Выберите тренера:</label><br>
+        <select id="coach-select" name="coach-select" required>
+            <option value="" disabled selected>Выберите тренера</option>
+        </select><br><br>
+
+        <label>Выберите футболистов:</label><br>
+        <div id="footballer-container"></div><br>
+
+        <button type="submit">Создать футбольный клуб</button>
+    </form>
+</body>
+</html>
