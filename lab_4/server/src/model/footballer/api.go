@@ -22,3 +22,12 @@ func GetFootballers() ([]Footballer, error) {
 
 	return requestCoaches, nil
 }
+
+func CreateFootballer(footballer Footballer) error {
+	_, err := settings.DBinst.Exec("INSERT INTO footballer (first_name, last_name, position, rating) VALUES ($1, $2, $3, $4)",
+        footballer.FirstName, footballer.LastNane, footballer.Position, footballer.Rating)
+	if err != nil {
+		return  err
+	}
+	return nil
+}

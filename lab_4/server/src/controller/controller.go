@@ -63,9 +63,35 @@ func RegistrationUser(c *gin.Context) {
 
 	err = json.Unmarshal(jsonData, &request)
 	if err != nil {
-		log.Println("400 блллл")
 		c.JSON(400, err.Error())
 		return
+	}
+
+	//создание тренера, футболиста если они регистрируются
+	if request.Role == "coach" {
+		coachDTO := coach.Coach{
+			FirstName: request.FirstName,
+			LastName:  request.LastName,
+		}
+
+		err := coach.CreateCoach(coachDTO)
+		if err != nil {
+			c.JSON(500, gin.H{"error": "Error server"})
+		}
+	}
+
+	if request.Role == "player" {
+		footballerDTO := footballer.Footballer{
+			FirstName: request.FirstName,
+			LastNane: request.LastName,
+			Position: "NUL",
+			Rating: 0,
+		}
+
+		err := footballer.CreateFootballer(footballerDTO)
+		if err != nil {
+			c.JSON(500, gin.H{"error": "Error server"})
+		}
 	}
 
 	err = costumer.RegistCostumer(c, &request)

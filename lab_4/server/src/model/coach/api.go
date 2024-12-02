@@ -24,3 +24,13 @@ func GetCoaches() ([]Coach, error) {
 
 	return requestCoaches, nil
 }
+
+func CreateCoach(coach Coach) error {
+	_, err := settings.DBinst.Exec("INSERT INTO coach (first_name, last_name) VALUES ($1, $2)",
+        coach.FirstName, coach.LastName)
+	if err != nil {
+		return  err
+	}
+
+	return nil
+}
