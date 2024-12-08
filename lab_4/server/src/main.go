@@ -4,6 +4,7 @@ import (
 	"lab_4/server/src/controller"
 	"lab_4/server/src/settings"
 	"lab_4/server/src/url"
+	"log"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -21,6 +22,7 @@ func main() {
 	//инициализация настроек
 	settings.InitializeFromEnv()
 	settings.InitializePostgres()
+	log.Println(settings.Instance())
 
 	R = gin.Default()
 

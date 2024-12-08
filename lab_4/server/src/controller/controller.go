@@ -94,6 +94,20 @@ func RegistrationUser(c *gin.Context) {
 		}
 	}
 
+	if request.Role == "coach" {
+		coachDTO := coach.Coach{
+			FirstName: request.FirstName,
+			LastName: request.LastName,
+		}
+
+		err := coach.CreateCoach(coachDTO)
+		if err != nil {
+			c.JSON(500, gin.H{"error": "Error server"})
+		}
+	}
+
+
+
 	err = costumer.RegistCostumer(c, &request)
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Error server"})

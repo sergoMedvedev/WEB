@@ -118,8 +118,8 @@ INSERT INTO footballer (first_name, last_name, position, rating) VALUES
 `
 
 func InitializePostgres() {
-	//configUrl := "postgresql://localhost:15432/test"
-	db, err := sqlx.Connect("postgres", "user=postgres password=password dbname=test sslmode=disable")
+	log.Println(instance.UrlPostgres)
+	db, err := sqlx.Connect("postgres", instance.UrlPostgres)
 	if err != nil {
 		log.Fatalln("Error when connect db: ", err.Error())
 	}
