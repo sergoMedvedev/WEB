@@ -21,6 +21,8 @@ func InitApiSystem(system *gin.RouterGroup) {
 	system.GET("/football-clubs", controller.GetFootballClub)
 	system.GET("/squad", controller.GetPageSquad)
 	system.GET("/squads", controller.GetSquad)
+	system.GET("/coach", controller.GetPageCoach)
+	system.GET("/footballer", controller.GetPageFootballer)
 }
 
 func InitApiCoach(coach *gin.RouterGroup) {

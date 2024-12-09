@@ -83,9 +83,9 @@ func RegistrationUser(c *gin.Context) {
 	if request.Role == "player" {
 		footballerDTO := footballer.Footballer{
 			FirstName: request.FirstName,
-			LastNane: request.LastName,
-			Position: "NUL",
-			Rating: 0,
+			LastNane:  request.LastName,
+			Position:  "NUL",
+			Rating:    0,
 		}
 
 		err := footballer.CreateFootballer(footballerDTO)
@@ -97,7 +97,7 @@ func RegistrationUser(c *gin.Context) {
 	if request.Role == "coach" {
 		coachDTO := coach.Coach{
 			FirstName: request.FirstName,
-			LastName: request.LastName,
+			LastName:  request.LastName,
 		}
 
 		err := coach.CreateCoach(coachDTO)
@@ -105,8 +105,6 @@ func RegistrationUser(c *gin.Context) {
 			c.JSON(500, gin.H{"error": "Error server"})
 		}
 	}
-
-
 
 	err = costumer.RegistCostumer(c, &request)
 	if err != nil {
@@ -141,7 +139,7 @@ func GetFootballClubs(c *gin.Context) {
 func GetFootballClub(c *gin.Context) {
 	footballClubList, err := system.GetFootballClub()
 	if err != nil {
-		c.JSON(500, gin.H{"status":"Error get football club"})
+		c.JSON(500, gin.H{"status": "Error get football club"})
 	}
 
 	c.JSON(200, footballClubList)
@@ -154,10 +152,18 @@ func GetPageSquad(c *gin.Context) {
 func GetSquad(c *gin.Context) {
 	squadList, err := system.GetSquadList()
 	if err != nil {
-		c.JSON(500, gin.H{"status":"Error get squad"})
+		c.JSON(500, gin.H{"status": "Error get squad"})
 	}
 
 	c.JSON(200, squadList)
+}
+
+func GetPageCoach(c *gin.Context) {
+	c.HTML(200, "coaches.html", nil)
+}
+
+func GetPageFootballer(c *gin.Context) {
+	c.HTML(200, "footballer.html", nil)
 }
 
 //____________COACH________________________________
