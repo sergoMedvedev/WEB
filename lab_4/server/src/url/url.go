@@ -17,6 +17,10 @@ func InitApiSystem(system *gin.RouterGroup) {
 	system.GET("/", controller.GetSystemPage)
 	system.GET("/create-football-club", controller.GetPageCreateFootballClub)
 	system.POST("/create-football-club-my-system", controller.CreateFootbalClubAndSquad)
+	system.GET("/football-club", controller.GetFootballClubs)
+	system.GET("/football-clubs", controller.GetFootballClub)
+	system.GET("/squad", controller.GetPageSquad)
+	system.GET("/squads", controller.GetSquad)
 }
 
 func InitApiCoach(coach *gin.RouterGroup) {

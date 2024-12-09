@@ -134,6 +134,32 @@ func GetPageCreateFootballClub(c *gin.Context) {
 	c.HTML(200, "create-foolball-club.html", nil)
 }
 
+func GetFootballClubs(c *gin.Context) {
+	c.HTML(200, "football-club.html", nil)
+}
+
+func GetFootballClub(c *gin.Context) {
+	footballClubList, err := system.GetFootballClub()
+	if err != nil {
+		c.JSON(500, gin.H{"status":"Error get football club"})
+	}
+
+	c.JSON(200, footballClubList)
+}
+
+func GetPageSquad(c *gin.Context) {
+	c.HTML(200, "squad.html", nil)
+}
+
+func GetSquad(c *gin.Context) {
+	squadList, err := system.GetSquadList()
+	if err != nil {
+		c.JSON(500, gin.H{"status":"Error get squad"})
+	}
+
+	c.JSON(200, squadList)
+}
+
 //____________COACH________________________________
 
 func GetCoaches(c *gin.Context) {
