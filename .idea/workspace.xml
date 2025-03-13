@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178b9800-dd73-4c6f-aef2-1c8bde8015bd" name="Changes" comment="осталось только фотки сайта">
+    <list default="true" id="178b9800-dd73-4c6f-aef2-1c8bde8015bd" name="Changes" comment="создал новую ветку, сделал первый коммит с новой папкой">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab_3/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/lab_3/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab_3/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/lab_3/router/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab_4/server/src/settings/settingsdb.go" beforeDir="false" afterPath="$PROJECT_DIR$/lab_4/server/src/settings/settingsdb.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,21 +30,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;lab__3&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sergey/develop/WEB&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "lab__4",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/sergey/develop/WEB",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lab_2/img" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -55,6 +65,16 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="178b9800-dd73-4c6f-aef2-1c8bde8015bd" name="Changes" comment="создал новую ветку, сделал первый коммит с новой папкой" />
+      <created>1729628802927</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729628802927</updated>
+    </task>
+    <servers />
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
@@ -73,7 +93,8 @@
     <MESSAGE value="создал первый endpoint [get]" />
     <MESSAGE value="работаю над use case" />
     <MESSAGE value="осталось только фотки сайта" />
-    <option name="LAST_COMMIT_MESSAGE" value="осталось только фотки сайта" />
+    <MESSAGE value="создал новую ветку, сделал первый коммит с новой папкой" />
+    <option name="LAST_COMMIT_MESSAGE" value="создал новую ветку, сделал первый коммит с новой папкой" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

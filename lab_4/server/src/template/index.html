@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система Футбольного Клуба</title>
+    <script>
+        function checkAccessAndRedirect() {
+            // Отправляем запрос на сервер для проверки прав доступа
+            fetch('/my-system/create-football-club', {
+                method: 'GET',
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    // Успешная проверка прав, переходим на страницу
+                    window.location.href = '/my-system/create-football-club';
+                } else if (response.status === 403) {
+                    // Недостаточно прав, отображаем предупреждение
+                    warning.textContent = 'У вас недостаточно прав для выполнения этого действия.';
+                    warning.style.display = 'block';
+                } else {
+                    console.error('Ошибка проверки прав доступа');
+                }
+            })
+            .catch(error => console.error('Ошибка:', error));
+        }
+
+        function redirectToPage(url) {
+            window.location.href = url;
+        }
+
+        function fetchList(endpoint) {
+            fetch(endpoint)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Выводим список в консоль, или можно отобразить на странице
+                    alert('Данные успешно загружены, посмотрите консоль!');
+                })
+                .catch(error => console.error('Ошибка получения данных:', error));
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-image: url('https://cdn.forbes.ru/files/story_images/stadion.webp'); /* Замените на свой путь */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            color: #000000;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        #warning-message {
+            color: red;
+            display: none;
+            margin-top: 20px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        button {
+            padding: 15px 25px;
+            background-color: #5c9ded;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 15px;
+            width: 80%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #468ccf;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Добро пожаловать в систему Футбольного Клуба!</h1>
+        <div class="button-container">
+            <button onclick="checkAccessAndRedirect()">Создать футбольный клуб</button>
+            <button onclick="redirectToPage('/my-system/squad')">Перейти к составам</button>
+            <button onclick="redirectToPage('/my-system/football-club')">Список футбольных клубов с тренерами</button>
+            <button onclick="redirectToPage('/my-system/coach')">Список тренеров</button>
+            <button onclick="redirectToPage('/my-system/footballer')">Список футболистов</button>
+        </div>
+        <div id="warning-message"></div>
+    </div>
+
+</body>
+</html>

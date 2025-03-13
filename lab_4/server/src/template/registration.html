@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://cdn.forbes.ru/files/story_images/stadion.webp'); /* Замените на свой путь */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            color: #000000;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Прозрачный белый фон */
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            z-index: 1;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            border-color: #5c9ded;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #5c9ded;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #468ccf;
+        }
+
+        .link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #468ccf;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .link:hover {
+            color: #5c9ded;
+        }
+    </style>
+</head>
+<body>
+    <h1>Регистрация</h1>
+    <div class="form-container">
+        <form id="register-form">
+            <input type="text" name="first_name" placeholder="Имя" required>
+            <input type="text" name="last_name" placeholder="Фамилия" required>
+            <input type="text" name="login" placeholder="Логин" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <select name="role" required>
+                <option value="" disabled selected>Выберите статус</option>
+                <option value="coach">Тренер</option>
+                <option value="player">Футболист</option>
+                <option value="user">Пользователь</option>
+            </select>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const firstName = event.target.first_name.value;
+            const lastName = event.target.last_name.value;
+            const login = event.target.login.value;
+            const password = event.target.password.value;
+            const role = event.target.role.value;
+
+            if (password.length < 8) {
+                alert('Пароль должен быть не менее 8 символов.');
+                return;
+            }
+
+            const response = await fetch('/auth/registration-user', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({firstName, lastName, login, password, role })
+            });
+
+            if (response.ok) {
+                window.location.href = '/'; // Переход на страницу входа
+            } else {
+                alert('Ошибка регистрации. Попробуйте снова.');
+            }
+        });
+    </script>
+</body>
+</html>

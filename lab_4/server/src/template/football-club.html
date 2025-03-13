@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список футбольных клубов</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Функция для загрузки футбольных клубов
+            function loadFootballClubs() {
+                fetch('/my-system/football-clubs')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('clubs-table-body');
+                        tableBody.innerHTML = ''; // Очистка таблицы перед добавлением новых данных
+                        data.forEach(club => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${club.club_name}</td>
+                                <td>${club.coach_first_name}</td>
+                                <td>${club.coach_last_name}</td>
+                                <td>${club.squad_name}</td>
+                                <td>${club.squad_rating}</td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Ошибка загрузки клубов:', error);
+                        alert('Не удалось загрузить данные о футбольных клубах.');
+                    });
+            }
+
+            // Загружаем данные при загрузке страницы
+            loadFootballClubs();
+        });
+
+        // Функция перехода на главную страницу
+        function goToHomePage() {
+            window.location.href = '/my-system/'; // Замените '/' на правильный URL главной страницы
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url('https://cdn.forbes.ru/files/story_images/stadion.webp'); /* Замените на свой путь */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #5c9ded;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .home-button:hover {
+            background-color: #468ccf;
+        }
+
+        h1 {
+            color: #000000;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #5c9ded;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="goToHomePage()">На главную</button>
+    <div class="container">
+        <h1>Список футбольных клубов</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Название Клуба</th>
+                    <th>Имя Тренера</th>
+                    <th>Фамилия Тренера</th>
+                    <th>Название Состава</th>
+                    <th>Рейтинг Состава</th>
+                </tr>
+            </thead>
+            <tbody id="clubs-table-body">
+                <!-- Данные будут добавлены асинхронно -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

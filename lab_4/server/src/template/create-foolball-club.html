@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание футбольного клуба</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('/coach/coaches')
+                .then(response => response.json())
+                .then(data => {
+                    const coachSelect = document.getElementById('coach-select');
+                    data.forEach(coach => {
+                        const option = document.createElement('option');
+                        option.textContent = `${coach.firstName} ${coach.lastName}`;
+                        option.value = coach.coachId;
+                        coachSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Ошибка загрузки тренеров:', error));
+
+            fetch('/footballer/footballers')
+                .then(response => response.json())
+                .then(data => {
+                    const footballerContainer = document.getElementById('footballer-container');
+                    data.forEach(footballer => {
+                        const footballerDiv = document.createElement('div');
+                        footballerDiv.className = 'footballer';
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.value = footballer.footballerId;
+                        checkbox.className = 'footballer-checkbox';
+
+                        const info = document.createElement('span');
+                        info.textContent = `${footballer.firstName} ${footballer.lastName} | Рейтинг: ${footballer.rating} | Позиция: ${footballer.position}`;
+
+                        footballerDiv.appendChild(checkbox);
+                        footballerDiv.appendChild(info);
+                        footballerContainer.appendChild(footballerDiv);
+                    });
+                })
+                .catch(error => console.error('Ошибка загрузки футболистов:', error));
+
+            document.getElementById('create-club-form').addEventListener('submit', event => {
+                event.preventDefault();
+                const clubName = document.getElementById('club-name').value;
+                const squadName = document.getElementById('squad-name').value;
+                const coachId = document.getElementById('coach-select').value;
+                const selectedFootballers = Array.from(document.querySelectorAll('.footballer-checkbox:checked'))
+                    .map(checkbox => checkbox.value);
+
+                const requestData = {
+                    club_name: clubName,
+                    squad_name: squadName,
+                    coach_id: coachId,
+                    footballer_ids: selectedFootballers
+                };
+
+                fetch('/my-system/create-football-club-my-system', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestData)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Футбольный клуб успешно создан!');
+                        window.location.reload();
+                    } else {
+                        response.json().then(err => alert(`Ошибка: ${err.message}`));
+                    }
+                })
+                .catch(error => alert(`Ошибка запроса: ${error.message}`));
+            });
+        });
+
+        function goToHomePage() {
+            window.location.href = '/my-system/'; // Замените '/' на правильный URL главной страницы
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-image: url('https://cdn.forbes.ru/files/story_images/stadion.webp'); /* Замените на свой путь */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #5c9ded;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .home-button:hover {
+            background-color: #468ccf;
+        }
+
+        h1 {
+            color: #000000;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .footballer {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .footballer-checkbox {
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 15px 25px;
+            background-color: #5c9ded;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #468ccf;
+        }
+
+        #footballer-container {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="goToHomePage()">На главную</button>
+    <div class="container">
+        <h1>Создание футбольного клуба</h1>
+        <form id="create-club-form">
+            <label for="club-name">Название клуба:</label>
+            <input type="text" id="club-name" name="club-name" required>
+
+            <label for="squad-name">Название состава:</label>
+            <input type="text" id="squad-name" name="squad-name" required>
+
+            <label for="coach-select">Выберите тренера:</label>
+            <select id="coach-select" name="coach-select" required>
+                <option value="" disabled selected>Выберите тренера</option>
+            </select>
+
+            <label>Выберите футболистов:</label>
+            <div id="footballer-container"></div>
+
+            <button type="submit">Создать футбольный клуб</button>
+        </form>
+    </div>
+</body>
+</html>
